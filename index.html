@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIGHTHOUSE 光之旅 - 台灣東北角最美的海天一色</title>
+    <meta name="description" content="蘇澳光之旅，佇立於海中央的純白燈塔旅店，享受極致的海天一色美景">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #FFFFFF;
+            color: #1C3D5A;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        nav.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(197,160,89,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            color: #FFFFFF;
+            font-weight: 300;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled .logo {
+            color: #005B7F;
+            text-shadow: none;
+        }
+        
+        .nav-menu {
+            display: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        
+        nav.scrolled .nav-menu a {
+            color: #1C3D5A;
+            text-shadow: none;
+        }
+        
+        .nav-menu a:hover {
+            color: #C5A059;
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: block;
+        }
+        
+        nav.scrolled .menu-toggle {
+            color: #005B7F;
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            color: #1C3D5A;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, 
+                rgba(0,91,127,0.2) 0%, 
+                rgba(28,61,90,0.4) 50%,
+                rgba(0,91,127,0.3) 100%
+            ),
+            linear-gradient(135deg, #005B7F 0%, #1C3D5A 100%);
+            overflow: hidden;
+        }
+        
+        .lighthouse-beam {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(197,160,89,0.8), transparent);
+            transform: translate(-50%, -50%) rotate(0deg);
+            transform-origin: center;
+            animation: lighthouse 8s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes lighthouse {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .parallax-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: radial-gradient(ellipse at bottom, 
+                rgba(255,255,255,0.1) 0%, 
+                transparent 50%
+            );
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 300;
+            color: #FFFFFF;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            color: #C5A059;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            animation: fadeInUp 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.1em;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            animation: fadeInUp 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            font-size: 1rem;
+            border: 1px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        .btn-primary {
+            background: #C5A059;
+            color: #FFFFFF;
+            border-color: #C5A059;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: #C5A059;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #FFFFFF;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+        }
+        
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(180deg, transparent, #FFFFFF);
+            margin: 0 auto;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        /* Sections */
+        section {
+            padding: clamp(4rem, 10vw, 8rem) 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(3rem, 8vw, 5rem);
+        }
+        
+        .section-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 300;
+            color: #005B7F;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+        
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C5A059, transparent);
+            margin: 0 auto 3rem;
+        }
+        
+        .section-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.9;
+            color: #1C3D5A;
+            max-width: 800px;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Story Section */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            padding: clamp(3rem, 8vw, 5rem);
+            background: linear-gradient(135deg, #F4F4F4 0%, #FFFFFF 100%);
+            border-radius: 4px;
+            border: 1px solid rgba(197,160,89,0.1);
+        }
+        
+        .location-card {
+            padding: 2rem;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,91,127,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,91,127,0.1);
+        }
+        
+        .location-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .location-name {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.3rem;
+            color: #005B7F;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .location-desc {
+            font-size: 0.95rem;
+            color: #1C3D5A;
+            opacity: 0.7;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Rooms Section */
+        .rooms-section {
+            background: linear-gradient(180deg, #F4F4F4 0%, #FFFFFF 100%);
+        }
+        
+        .room-carousel {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .carousel-track {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .room-slide {
+            min-width: 100%;
+            padding: 3rem;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,91,127,0.1);
+        }
+        
+        .room-image {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, 
+                rgba(0,91,127,0.1) 0%, 
+                rgba(28,61,90,0.05) 100%
+            );
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid #FFFFFF;
+            box-shadow: inset 0 0 0 1px rgba(0,91,127,0.1), 0 10px 40px rgba(0,91,127,0.1);
+            position: relative;
+        }
+        
+        .room-view-label {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #005B7F;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .room-name {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #005B7F;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .room-name-en {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #C5A059;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.15em;
+            font-style: italic;
+        }
+        
+        .room-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #1C3D5A;
+            opacity: 0.8;
+            letter-spacing: 0.05em;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,91,127,0.2);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-nav:hover {
+            background: #C5A059;
+            border-color: #C5A059;
+        }
+        
+        .carousel-nav.prev {
+            left: -1rem;
+        }
+        
+        .carousel-nav.next {
+            right: -1rem;
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(0,91,127,0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            width: 40px;
+            background: #C5A059;
+        }
+        
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .experience-card {
+            padding: 2.5rem 2rem;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,91,127,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .experience-card:nth-child(odd) {
+            background: linear-gradient(135deg, #F4F4F4 0%, #FFFFFF 100%);
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,91,127,0.1);
+        }
+        
+        .experience-time {
+            font-size: 0.9rem;
+            color: #C5A059;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .experience-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
+            color: #005B7F;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .experience-title-en {
+            font-size: 0.95rem;
+            color: #1C3D5A;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            font-style: italic;
+        }
+        
+        .experience-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #1C3D5A;
+            opacity: 0.8;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Facilities Section */
+        .facilities-section {
+            background: linear-gradient(180deg, #F4F4F4 0%, #FFFFFF 100%);
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .facility-card {
+            padding: 2.5rem 2rem;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,91,127,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            border-color: #C5A059;
+            box-shadow: 0 10px 30px rgba(197,160,89,0.1);
+        }
+        
+        .facility-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .facility-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.3rem;
+            color: #005B7F;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .facility-desc {
+            font-size: 1rem;
+            color: #1C3D5A;
+            opacity: 0.7;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+        }
+        
+        /* Timeline */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: clamp(1rem, 4vw, 2rem);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #C5A059 0%, rgba(197,160,89,0.2) 100%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-dot {
+            min-width: clamp(2rem, 4vw, 4rem);
+            height: clamp(2rem, 4vw, 4rem);
+            border-radius: 50%;
+            background: #C5A059;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+        
+        .timeline-dot:nth-child(odd) {
+            background: #005B7F;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding-top: 0.3rem;
+        }
+        
+        .timeline-time {
+            font-size: 1.1rem;
+            color: #C5A059;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        
+        .timeline-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.4rem;
+            color: #005B7F;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .timeline-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #1C3D5A;
+            opacity: 0.8;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Notice Box */
+        .notice-box {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(0,91,127,0.03) 0%, rgba(197,160,89,0.03) 100%);
+            border: 1px solid rgba(197,160,89,0.2);
+            border-left: 4px solid #C5A059;
+        }
+        
+        .notice-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.3rem;
+            color: #005B7F;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .notice-list {
+            list-style: none;
+        }
+        
+        .notice-item {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #1C3D5A;
+            opacity: 0.8;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            letter-spacing: 0.05em;
+        }
+        
+        .notice-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #C5A059;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1C3D5A 0%, #005B7F 100%);
+            color: #FFFFFF;
+            padding: clamp(3rem, 8vw, 5rem) 2rem 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            color: #C5A059;
+        }
+        
+        .footer-brand p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            letter-spacing: 0.1em;
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .footer-tagline {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+        
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover {
+            color: #C5A059;
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            letter-spacing: 0.05em;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-bottom p {
+            margin-top: 0.5rem;
+        }
+        
+        /* Floating LINE Button */
+        .line-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #06C755;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1.8rem;
+        }
+        
+        .line-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(6,199,85,0.4);
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-nav {
+                padding: 0.7rem;
+            }
+            
+            .carousel-nav.prev {
+                left: 0.5rem;
+            }
+            
+            .carousel-nav.next {
+                right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">BRIGHTHOUSE</div>
+            
+            <div class="nav-menu">
+                <a href="#story">探索</a>
+                <a href="#rooms">客房</a>
+                <a href="#experience">體驗</a>
+                <a href="#guide">指南</a>
+            </div>
+            
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#story" onclick="toggleMenu()">探索</a>
+            <a href="#rooms" onclick="toggleMenu()">客房</a>
+            <a href="#experience" onclick="toggleMenu()">體驗</a>
+            <a href="#guide" onclick="toggleMenu()">指南</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="lighthouse-beam"></div>
+        <div class="parallax-waves"></div>
+        
+        <div class="hero-content">
+            <h1>蘇澳光之旅</h1>
+            <div class="subtitle">BRIGHTHOUSE</div>
+            <p>台灣東北角最美的海天一色</p>
+            
+            <div class="cta-buttons">
+                <a href="https://lin.ee/HDrHFE3" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    LINE 訂房
+                </a>
+                <a href="#rooms" class="btn btn-secondary">
+                    探索客房
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">佇立於海中央的純白燈塔</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    從台北順延北濱公路，或經國道五號穿過蘇澳港前的跨海大橋，
+                    您會看見一座醒目的純白建築，獨立於台灣最大的陸連島之上。
+                    這裡是光之旅，位於軍港、商港、漁港三大良港的中心點，
+                    是台灣東北角唯一能讓您感受「住在海中央」的所在。
+                </p>
+            </div>
+            
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-icon">📍</div>
+                    <h3 class="location-name">豆腐岬</h3>
+                    <p class="location-desc">獨特海蝕地形</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">📍</div>
+                    <h3 class="location-name">跨海大橋</h3>
+                    <p class="location-desc">亞洲首座單樑懸吊橋</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">📍</div>
+                    <h3 class="location-name">內埤海灘</h3>
+                    <p class="location-desc">情人灣秘境</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">📍</div>
+                    <h3 class="location-name">南方澳</h3>
+                    <p class="location-desc">漁港文化重鎮</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">窗景即藝術</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="room-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-inner" id="carouselInner">
+                        <div class="room-slide">
+                            <div class="room-image">
+                                <div class="room-view-label">
+                                    東向豆腐岬全景<br>
+                                    <span style="font-size: 0.9em; opacity: 0.7;">[ 窗景視角 ]</span>
+                                </div>
+                            </div>
+                            <h3 class="room-name">豆腐岬海景房</h3>
+                            <p class="room-name-en">Tofu Cape Ocean View</p>
+                            <p class="room-description">清晨第一道曙光灑落，獨享東北角秘境</p>
+                        </div>
+                        
+                        <div class="room-slide">
+                            <div class="room-image">
+                                <div class="room-view-label">
+                                    180度海天一線<br>
+                                    <span style="font-size: 0.9em; opacity: 0.7;">[ 窗景視角 ]</span>
+                                </div>
+                            </div>
+                            <h3 class="room-name">無敵海景房</h3>
+                            <p class="room-name-en">Premium Ocean View</p>
+                            <p class="room-description">躺在床上，太平洋就是您的天花板</p>
+                        </div>
+                        
+                        <div class="room-slide">
+                            <div class="room-image">
+                                <div class="room-view-label">
+                                    蘇澳港與跨海大橋<br>
+                                    <span style="font-size: 0.9em; opacity: 0.7;">[ 窗景視角 ]</span>
+                                </div>
+                            </div>
+                            <h3 class="room-name">跨港海景房</h3>
+                            <p class="room-name-en">Harbor Bridge View</p>
+                            <p class="room-description">見證船隻往來，聆聽海港的呼吸</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-nav prev" onclick="prevSlide()">‹</button>
+                <button class="carousel-nav next" onclick="nextSlide()">›</button>
+                
+                <div class="carousel-dots">
+                    <button class="dot active" onclick="goToSlide(0)"></button>
+                    <button class="dot" onclick="goToSlide(1)"></button>
+                    <button class="dot" onclick="goToSlide(2)"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">時光的儀式</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    每個時刻都經過精心設計，讓您在海天之間找到屬於自己的節奏
+                </p>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-time">15:00 - 17:00</div>
+                    <h3 class="experience-title">午茶時光</h3>
+                    <p class="experience-title-en">Afternoon Tea</p>
+                    <p class="experience-desc">在海景露台品味精緻茶點</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-time">08:30 - 10:30</div>
+                    <h3 class="experience-title">海景早餐</h3>
+                    <p class="experience-title-en">Ocean View Breakfast</p>
+                    <p class="experience-desc">迎接第一道曙光與豐盛早晨</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-time">全日開放</div>
+                    <h3 class="experience-title">頂樓觀景台</h3>
+                    <p class="experience-title-en">Rooftop Terrace</p>
+                    <p class="experience-desc">360度環景，捕捉日出日落</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">為您的住宿品質</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    我們悉心維護每一個細節，確保您擁有寧靜純粹的度假時光
+                </p>
+            </div>
+            
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <div class="facility-icon">🚫🐶</div>
+                    <h3 class="facility-title">環境純淨</h3>
+                    <p class="facility-desc">維持高品質住宿環境</p>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">🤫</div>
+                    <h3 class="facility-title">寧靜時光</h3>
+                    <p class="facility-desc">22:00 後輕聲細語</p>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">🚬</div>
+                    <h3 class="facility-title">清新空氣</h3>
+                    <p class="facility-desc">全館禁菸空間</p>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">🛡️</div>
+                    <h3 class="facility-title">專屬門禁</h3>
+                    <p class="facility-desc">21:00-08:00 安全管制</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arrival Guide -->
+    <section id="guide">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">抵達指南</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">🕒</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">15:00</div>
+                        <h3 class="timeline-title">入住時刻</h3>
+                        <p class="timeline-desc">歡迎來到光之旅，開啟您的海天之旅</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">☕</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">15:00-17:00</div>
+                        <h3 class="timeline-title">午茶時光</h3>
+                        <p class="timeline-desc">享用精緻下午茶點</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">🔒</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">21:00</div>
+                        <h3 class="timeline-title">門禁管制</h3>
+                        <p class="timeline-desc">大門關閉，車輛停外側，旅客由側門進出</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">🌙</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">22:00</div>
+                        <h3 class="timeline-title">寧靜時光</h3>
+                        <p class="timeline-desc">請輕聲細語，尊重其他住客</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">🌅</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">08:30-10:30</div>
+                        <h3 class="timeline-title">海景早餐</h3>
+                        <p class="timeline-desc">迎接晨曦，享用豐盛早餐</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">👋</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">11:00</div>
+                        <h3 class="timeline-title">退房時刻</h3>
+                        <p class="timeline-desc">期待您的再次光臨</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notice-box">
+                <h3 class="notice-title">貼心提醒</h3>
+                <ul class="notice-list">
+                    <li class="notice-item">光之旅位於國家管制區域，晚間 21:00 至早上 08:00 大門關閉</li>
+                    <li class="notice-item">門禁期間外出返回，車輛請停放外側停車格，由側門進出</li>
+                    <li class="notice-item">全館禁止吸菸，違者將酌收清潔費 NT$6,000</li>
+                    <li class="notice-item">為維護住宿品質，恕不接受寵物入住</li>
+                    <li class="notice-item">訂房需全額付款，取消政策請參閱官網說明</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>BRIGHTHOUSE</h3>
+                <p>蘇澳光之旅</p>
+                <p class="footer-tagline">台灣東北角最美的海天一色</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>聯絡資訊</h4>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>270 宜蘭縣蘇澳鎮跨港路1號</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>+886 3-996-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span>hello@brighthousetaiwan.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>快速連結</h4>
+                <div class="footer-links">
+                    <a href="https://lin.ee/HDrHFE3" target="_blank" rel="noopener noreferrer">LINE 訂房小管家</a>
+                    <a href="tel:+88639964567">電話訂房</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 BRIGHTHOUSE 光之旅 · 汎太平洋國際有限公司</p>
+            <p>Hotel License ID: 258 · Powered by 滿房寶旅宿管理系統</p>
+        </div>
+    </footer>
+
+    <!-- Floating LINE Button -->
+    <a href="https://lin.ee/HDrHFE3" target="_blank" rel="noopener noreferrer" class="line-button">
+        💬
+    </a>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 3;
+        
+        function updateCarousel() {
+            const inner = document.getElementById('carouselInner');
+            inner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+        
+        // Auto-advance carousel
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
