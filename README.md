@@ -1,0 +1,2 @@
+# LIGHT-HOTEL-SAMPLE
+光之旅示範網頁
